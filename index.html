@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 
-<head>
+<head oncontextmenu=self.event.returnValue=false onselectstart="return false">
 	<meta charset="UTF-8">
 	<title>Club 3d</title>
 	<link rel="icon" href="images/icon.png" sizes="32x32">
+	<script type="text/javascript" src="scripts/protection.js"></script>
+
 </head>
 <style type="text/css">
 	* {
@@ -66,7 +68,7 @@
 
 </style>
 
-<body>
+<body oncontextmenu=self.event.returnValue=false onselectstart="return false">
 	<div id="box">
 		<img src="images/photo01.jpg" />
 		<img src="images/photo02.jpg" />
@@ -81,13 +83,10 @@
 
 
 	</div>
-	<audio src="main1.mp3" id="audio1" hidden="true" autoplay="true" loop="true"></audio>
+	<audio src="audio/autumn_main_theme.mp3" id="audio1" hidden="true" autoplay="true" loop="true"></audio>
 </body>
-<script type="text/javascript">
-	var oimg = box.getElementsByTagName( "img" );
-	for ( var i = 0; i < oimg.length; i++ ) {
-		oimg[ i ].style.cssText = "transform:rotateY(" + i * 36 + "deg) translateZ(500px)";
-	}
+<script type="text/javascript" src="scripts/rotation.js">
+
 </script>
 
 </html>
