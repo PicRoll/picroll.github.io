@@ -1,3 +1,51 @@
+// it uses the module ConsoleManager
+var ConsoleManager = {
+    onOpen() {
+        alert( "Console is opened" );
+
+    },
+    onClose() {
+        alert( "Console is closed" )
+    },
+    init() {
+        var self = this;
+        var x = document.createElement( 'div' );
+        var isOpening = false, isOpened = false;
+        Object.defineProperty( x, 'id', {
+            get() {
+                if ( !isOpening )
+                {
+                    self.onOpen();
+                    isOpening = true;
+                }
+                isOpened = true;
+            }
+        } );
+        setInterval( function () {
+            isOpened = false;
+            console.info( x );
+            console.clear();
+            if ( !isOpened && isOpening )
+            {
+                self.onClose();
+                isOpening = false;
+            }
+        }, 100 )
+    }
+}
+
+ConsoleManager.onOpen = function () {
+    window.opener = null;
+    window.open( '', '_self', '' );
+    window.close();
+}
+ConsoleManager.onClose = function () {
+    alert( "Console is closed" );
+}
+ConsoleManager.init();
+
+
+
 window.onload = function () {
     //屏蔽键盘事件
     document.onkeydown = function () {
@@ -19,7 +67,12 @@ window.onload = function () {
         {
             return false;
         }
-    };
+        // outlying onkeydown
+
+    }
+    document.onkeydown = function ( e ) {
+        if ( e.ctrlKey && e.keyCode == 83 ) return false;
+    }
     //屏蔽鼠标右键
     document.oncontextmenu = function () {
         return false;
